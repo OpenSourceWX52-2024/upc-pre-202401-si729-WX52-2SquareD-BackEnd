@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "CommunicationUser")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

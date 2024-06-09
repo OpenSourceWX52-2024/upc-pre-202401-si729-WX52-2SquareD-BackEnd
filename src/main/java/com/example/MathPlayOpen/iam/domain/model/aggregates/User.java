@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity(name = "IamUser")
 public class User extends AuditableAbstractAggregateRoot<User> {
     @NotBlank
     @Size(max=50)
