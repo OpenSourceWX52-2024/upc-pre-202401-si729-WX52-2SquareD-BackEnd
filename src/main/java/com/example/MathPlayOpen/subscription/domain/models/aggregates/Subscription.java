@@ -40,7 +40,7 @@ public class Subscription extends AbstractAggregateRoot<Subscription> {
     /**
      * The date and time when the subscription was created.
      */
-    @CreatedDate
+    @Getter
     @Column(nullable = false, updatable = false)
     private Date subscriptionStartDate;
 
