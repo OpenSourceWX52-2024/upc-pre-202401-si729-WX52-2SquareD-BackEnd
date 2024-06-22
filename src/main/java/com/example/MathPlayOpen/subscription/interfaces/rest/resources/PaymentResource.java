@@ -1,4 +1,6 @@
 package com.example.MathPlayOpen.subscription.interfaces.rest.resources;
 
-public record PaymentResource(String userId, Long subscriptionId, Double amount, String status) {
+import java.util.Date;
+
+public record PaymentResource(Long id, String userId, String paymentType, Date paymentDate, String paymentAmount, String paymentDescription) {
 }

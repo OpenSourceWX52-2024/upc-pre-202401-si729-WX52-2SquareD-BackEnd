@@ -26,7 +26,7 @@ public class Payment extends AbstractAggregateRoot<Payment> {
     @Getter
     private String paymentType;
 
-    @CreatedDate
+    @Getter
     @Column(nullable = false, updatable = false)
     private Date paymentDate;
 

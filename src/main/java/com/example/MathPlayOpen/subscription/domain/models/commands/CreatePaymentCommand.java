@@ -1,6 +1,8 @@
 package com.example.MathPlayOpen.subscription.domain.models.commands;
 
-public record CreatePaymentCommand(String userId,String paymentType, String paymentDate, String paymentAmount, String paymentDescription) {
+import java.util.Date;
+
+public record CreatePaymentCommand(String userId, String paymentType, String paymentDate, String paymentAmount, String paymentDescription) {
 
     public CreatePaymentCommand {
         if (userId == null || userId.isBlank()) {
