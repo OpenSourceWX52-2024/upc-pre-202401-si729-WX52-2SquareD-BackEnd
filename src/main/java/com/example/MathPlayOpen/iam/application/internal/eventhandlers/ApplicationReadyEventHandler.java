@@ -15,11 +15,17 @@ public class ApplicationReadyEventHandler {
     private final RoleCommandService roleCommandService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventHandler.class);
 
+
     public ApplicationReadyEventHandler(RoleCommandService roleCommandService) {
         this.roleCommandService = roleCommandService;
     }
 
 
+    /**
+     * Handle the ApplicationReadyEvent
+     * This method is used to seed the roles
+     * @param event the ApplicationReadyEvent the event to handle
+     */
     @EventListener
     public void on(ApplicationReadyEvent event) {
         var applicationName = event.getApplicationContext().getId();

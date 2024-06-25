@@ -16,11 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class BearerAuthorizationRequestFilter extends OncePerRequestFilter {
-
+public class BearerAuthorizationRequestFilter extends OncePerRequestFilter{
     private static final Logger LOGGER = LoggerFactory.getLogger(BearerAuthorizationRequestFilter.class);
     private final BearerTokenService tokenService;
-
 
     @Qualifier("defaultUserDetailsService")
     private final UserDetailsService userDetailsService;
@@ -30,27 +28,23 @@ public class BearerAuthorizationRequestFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
-    /**
-     * This method is responsible for filtering requests and setting the user authentication.
-     * @param request The request object.
-     * @param response The response object.
-     * @param filterChain The filter chain object.
-     */
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = tokenService.getBearerTokenFrom(request);
             LOGGER.info("Token: {}", token);
             if (token != null && tokenService.validateToken(token)) {
-                String username = tokenService.getUsernameFromToken(token);
-                var userDetails = userDetailsService.loadUserByUsername(username);
-                SecurityContextHolder.getContext().setAuthentication(UsernamePasswordAuthenticationTokenBuilder.build(userDetails, request));
+                String email = tokenService.getEmailFromToken(token);
+                var userDetails = userDetailsService.loadUserByUsername(email);
+                SecurityContextHolder.getContext()
+                        .setAuthentication(UsernamePasswordAuthenticationTokenBuilder
+                                .build(userDetails, request));
             } else {
                 LOGGER.info("Token is not valid");
             }
-
         } catch (Exception e) {
             LOGGER.error("Cannot set user authentication: {}", e.getMessage());
         }
