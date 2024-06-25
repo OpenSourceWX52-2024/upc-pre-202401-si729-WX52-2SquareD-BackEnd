@@ -5,6 +5,7 @@ import com.example.MathPlayOpen.iam.domain.model.commands.SignInCommand;
 import com.example.MathPlayOpen.iam.domain.model.commands.SignUpCommand;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+
 import java.util.Optional;
 
 public interface UserCommandService {
