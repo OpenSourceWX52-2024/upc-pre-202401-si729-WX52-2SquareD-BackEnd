@@ -5,7 +5,7 @@ import com.example.MathPlayOpen.iam.interfaces.rest.resources.AuthenticatedUserR
 
 public class AuthenticatedUserResourceFromEntityAssembler {
     public static AuthenticatedUserResource toResourceFromEntity(User user, String token) {
-        return new AuthenticatedUserResource(user.getId(), user.getUsername(), token);
+        return new AuthenticatedUserResource(user.getId(), user.getEmail(), token);
     }
 }
 
