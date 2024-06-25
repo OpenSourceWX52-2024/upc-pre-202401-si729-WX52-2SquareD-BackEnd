@@ -6,6 +6,7 @@ import com.example.MathPlayOpen.iam.domain.model.valueobjects.Roles;
 import com.example.MathPlayOpen.iam.domain.services.RoleCommandService;
 
 import com.example.MathPlayOpen.iam.infrastructure.persistence.jpa.repositories.RoleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -19,11 +20,12 @@ public class RoleCommandServiceImpl implements RoleCommandService {
     }
 
     @Override
+    @Transactional
     public void handle(SeedRolesCommand command) {
-        Arrays.stream(Roles.values()).forEach(role -> {
-            if (roleRepository.existsByName(role)) {
-                roleRepository.save(new Role(Roles.valueOf(role.name())));
+        for (Roles role : Roles.values()) {
+            if (!roleRepository.findByName(role).isPresent()) {
+                roleRepository.save(new Role(role));
             }
-        });
+        }
     }
 }

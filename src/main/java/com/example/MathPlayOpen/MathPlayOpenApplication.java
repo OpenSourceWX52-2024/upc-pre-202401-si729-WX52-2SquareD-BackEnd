@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@ComponentScan(basePackages = {"com.example.MathPlayOpen"})
 public class MathPlayOpenApplication {
 
 	public static void main(String[] args) {

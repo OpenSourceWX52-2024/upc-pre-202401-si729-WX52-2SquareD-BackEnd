@@ -2,23 +2,26 @@ package com.example.MathPlayOpen.iam.domain.model.entities;
 
 import com.example.MathPlayOpen.iam.domain.model.valueobjects.Roles;
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
+@Getter
 @Entity
+@Data
+@AllArgsConstructor
+@With
 public class Role {
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, unique = true, nullable = false)
+    @Column(length = 20)
     private Roles name;
 
     public Role() {}
+
     public Role(Roles name) {
         this.name = name;
     }
@@ -27,22 +30,37 @@ public class Role {
         return name.name();
     }
 
+    /**
+     * Get the default role
+     * @return the default role
+     */
     public static Role getDefaultRole() {
         return new Role(Roles.ROLE_STUDENT);
     }
 
+    /**
+     * Get the role from its name
+     * @param name the name of the role
+     * @return the role
+     */
     public static Role toRoleFromName(String name) {
-        try {
-            return new Role(Roles.valueOf(name));
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Role not found");
-        }
+        return new Role(Roles.valueOf(name));
     }
 
+    /**
+     * Validate the role set
+     * <p>
+     *     This method validates the role set and returns the default role if the set is empty.
+     * </p>
+     * @param roles the role set
+     * @return the role set
+     */
     public static List<Role> validateRoleSet(List<Role> roles) {
         if (roles == null || roles.isEmpty()) {
             return List.of(getDefaultRole());
         }
         return roles;
     }
+
 }
+
