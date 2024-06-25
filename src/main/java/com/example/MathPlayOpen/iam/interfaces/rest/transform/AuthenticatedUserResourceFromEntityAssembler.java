@@ -8,4 +8,3 @@ public class AuthenticatedUserResourceFromEntityAssembler {
         return new AuthenticatedUserResource(user.getId(), user.getEmail(), token);
     }
 }
-

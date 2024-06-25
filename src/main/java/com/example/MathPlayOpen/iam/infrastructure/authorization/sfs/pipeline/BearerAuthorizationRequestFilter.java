@@ -16,7 +16,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class BearerAuthorizationRequestFilter extends OncePerRequestFilter{
+public class BearerAuthorizationRequestFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(BearerAuthorizationRequestFilter.class);
     private final BearerTokenService tokenService;
 

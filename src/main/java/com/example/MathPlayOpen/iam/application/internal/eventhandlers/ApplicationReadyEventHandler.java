@@ -15,11 +15,9 @@ public class ApplicationReadyEventHandler {
     private final RoleCommandService roleCommandService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationReadyEventHandler.class);
 
-
     public ApplicationReadyEventHandler(RoleCommandService roleCommandService) {
         this.roleCommandService = roleCommandService;
     }
-
 
     /**
      * Handle the ApplicationReadyEvent
