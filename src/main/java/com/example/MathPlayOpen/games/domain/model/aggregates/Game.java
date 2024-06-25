@@ -34,8 +34,9 @@ public class Game extends AuditableAbstractAggregateRoot<Game> {
         this.tag = new Tag(Tags.valueOf(command.tagName().toUpperCase()));
     }
     // Public Methods
-    public void update(UpdateGameCommand command) {
+    public Game updateInformation(UpdateGameCommand command) {
         this.title = command.title();
         this.description = command.description();
+        return this;
     }
 }
