@@ -1,6 +1,7 @@
 package com.example.MathPlayOpen.performance.infrastructure.persistance.jpa.repositories;
 
 import com.example.MathPlayOpen.performance.domain.model.aggregates.Score;
+import com.example.MathPlayOpen.performance.domain.model.valueobjects.Amount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ScoreRepository extends JpaRepository<Score, Long> {
-    
+    boolean existsByParticipantIdAndAmount(Long participantId, Amount amount);
 }
