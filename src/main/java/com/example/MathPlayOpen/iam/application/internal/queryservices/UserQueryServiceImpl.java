@@ -2,8 +2,8 @@ package com.example.MathPlayOpen.iam.application.internal.queryservices;
 
 import com.example.MathPlayOpen.iam.domain.model.aggregates.User;
 import com.example.MathPlayOpen.iam.domain.model.queries.GetAllUsersQuery;
+import com.example.MathPlayOpen.iam.domain.model.queries.GetUserByEmailQuery;
 import com.example.MathPlayOpen.iam.domain.model.queries.GetUserByIdQuery;
-import com.example.MathPlayOpen.iam.domain.model.queries.GetUserByUsernameQuery;
 import com.example.MathPlayOpen.iam.domain.services.UserQueryService;
 import com.example.MathPlayOpen.iam.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -46,14 +46,11 @@ public class UserQueryServiceImpl implements UserQueryService {
         return userRepository.findById(query.userId());
     }
 
-    /**
-     * This method is used to handle {@link GetUserByUsernameQuery} query.
-     * @param query {@link GetUserByUsernameQuery} instance.
-     * @return {@link Optional} of {@link User} instance.
-     * @see GetUserByUsernameQuery
-     */
+
+
+
     @Override
-    public Optional<User> handle(GetUserByUsernameQuery query) {
-        return userRepository.findByUsername(query.username());
+    public Optional<User> handle(GetUserByEmailQuery query) {
+        return userRepository.findByEmail(query.email());
     }
 }

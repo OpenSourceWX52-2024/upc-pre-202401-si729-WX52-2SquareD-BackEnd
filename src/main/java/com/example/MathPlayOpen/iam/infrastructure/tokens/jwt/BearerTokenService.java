@@ -8,4 +8,6 @@ public interface BearerTokenService extends TokenService {
 
     String getBearerTokenFrom(HttpServletRequest request);
     String generateToken(Authentication authentication);
+
+
 }

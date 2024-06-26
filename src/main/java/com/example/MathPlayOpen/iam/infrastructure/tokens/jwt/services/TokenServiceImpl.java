@@ -50,7 +50,7 @@ public class TokenServiceImpl implements BearerTokenService {
     }
 
     @Override
-    public String getEmailFromToken(String token) {
+    public String getUsernameFromToken(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 

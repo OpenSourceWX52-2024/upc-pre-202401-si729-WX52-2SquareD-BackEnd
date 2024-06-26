@@ -1,6 +1,7 @@
 package com.example.MathPlayOpen.iam.infrastructure.authorization.sfs.pipeline;
 
 import com.example.MathPlayOpen.iam.infrastructure.authorization.sfs.model.UsernamePasswordAuthenticationTokenBuilder;
+
 import com.example.MathPlayOpen.iam.infrastructure.tokens.jwt.BearerTokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,7 +38,7 @@ public class BearerAuthorizationRequestFilter extends OncePerRequestFilter {
             String token = tokenService.getBearerTokenFrom(request);
             LOGGER.info("Token: {}", token);
             if (token != null && tokenService.validateToken(token)) {
-                String email = tokenService.getEmailFromToken(token);
+                String email = tokenService.getUsernameFromToken(token);
                 var userDetails = userDetailsService.loadUserByUsername(email);
                 SecurityContextHolder.getContext()
                         .setAuthentication(UsernamePasswordAuthenticationTokenBuilder

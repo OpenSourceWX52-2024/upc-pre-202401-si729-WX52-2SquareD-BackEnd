@@ -2,6 +2,6 @@ package com.example.MathPlayOpen.iam.application.internal.outboundservices.token
 
 public interface TokenService {
     String generateToken(String email);
-    String getEmailFromToken(String token);
+    String getUsernameFromToken(String token);
     boolean validateToken(String token);
 }
