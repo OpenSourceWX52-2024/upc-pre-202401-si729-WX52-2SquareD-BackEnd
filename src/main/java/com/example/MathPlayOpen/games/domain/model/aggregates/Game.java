@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -22,7 +23,7 @@ public class Game extends AuditableAbstractAggregateRoot<Game> {
     @NotBlank (message = "Description is required")
     @Size(max = 500, message = "Description must be less than 500 characters")
     private String description;
-    @NotBlank (message = "Tag is required")
+    @Setter
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tag_id", nullable = false)
     private Tag tag;

@@ -4,8 +4,11 @@ import com.example.MathPlayOpen.games.domain.model.aggregates.Game;
 import com.example.MathPlayOpen.games.domain.model.commands.CreateGameCommand;
 import com.example.MathPlayOpen.games.domain.model.commands.DeleteGameCommand;
 import com.example.MathPlayOpen.games.domain.model.commands.UpdateGameCommand;
+import com.example.MathPlayOpen.games.domain.model.entities.Tag;
+import com.example.MathPlayOpen.games.domain.model.valueobjects.Tags;
 import com.example.MathPlayOpen.games.domain.services.GameCommandService;
 import com.example.MathPlayOpen.games.infrastructure.persistance.jpa.repositories.GameRepository;
+import com.example.MathPlayOpen.games.infrastructure.persistance.jpa.repositories.TagRepository;
 
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -14,9 +17,11 @@ import java.util.Optional;
 public class GameCommandServiceImpl implements GameCommandService {
     // Private Attributes
     private final GameRepository gameRepository;
+    private final TagRepository tagRepository;
     // Constructor
-    public GameCommandServiceImpl(GameRepository gameRepository) {
+    public GameCommandServiceImpl(GameRepository gameRepository, TagRepository tagRepository) {
         this.gameRepository = gameRepository;
+        this.tagRepository = tagRepository;
     }
     // Public methods
     @Override
@@ -25,7 +30,13 @@ public class GameCommandServiceImpl implements GameCommandService {
         {
             throw new IllegalArgumentException("Game with title " + command.title() + " already exists");
         }
+        // Convert the tag name to enum
+        Tags tagEnum = Tags.valueOf(command.tagName().toUpperCase());
+        // Check if the tag already exists
+        Tag tag = tagRepository.findByTag(tagEnum)
+                .orElseGet(() -> tagRepository.save(new Tag(tagEnum)));
         var game = new Game(command);
+        game.setTag(tag); // Associate the existing or newly created tag with the game
         try {
             gameRepository.save(game);
         } catch (Exception e) {
