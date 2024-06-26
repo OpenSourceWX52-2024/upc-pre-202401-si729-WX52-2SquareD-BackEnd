@@ -19,7 +19,11 @@ public class ApplicationReadyEventHandler {
         this.roleCommandService = roleCommandService;
     }
 
-
+    /**
+     * Handle the ApplicationReadyEvent
+     * This method is used to seed the roles
+     * @param event the ApplicationReadyEvent the event to handle
+     */
     @EventListener
     public void on(ApplicationReadyEvent event) {
         var applicationName = event.getApplicationContext().getId();

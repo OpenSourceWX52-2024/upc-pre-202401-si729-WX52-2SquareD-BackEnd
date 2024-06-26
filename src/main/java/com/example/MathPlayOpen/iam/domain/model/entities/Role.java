@@ -2,16 +2,13 @@ package com.example.MathPlayOpen.iam.domain.model.entities;
 
 import com.example.MathPlayOpen.iam.domain.model.valueobjects.Roles;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import lombok.*;
 
 import java.util.List;
 
+@Getter
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @With
 public class Role {
@@ -23,14 +20,12 @@ public class Role {
     @Column(length = 20)
     private Roles name;
 
+    public Role() {}
+
     public Role(Roles name) {
         this.name = name;
     }
 
-    /**
-     * Get the name of the role as a string
-     * @return the name of the role as a string
-     */
     public String getStringName() {
         return name.name();
     }
@@ -40,7 +35,7 @@ public class Role {
      * @return the default role
      */
     public static Role getDefaultRole() {
-        return new Role(Roles.ROLE_USER);
+        return new Role(Roles.ROLE_STUDENT);
     }
 
     /**
@@ -68,3 +63,4 @@ public class Role {
     }
 
 }
+
