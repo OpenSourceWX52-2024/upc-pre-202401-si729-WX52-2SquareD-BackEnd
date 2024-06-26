@@ -9,6 +9,7 @@ import com.example.MathPlayOpen.iam.domain.services.UserCommandService;
 import com.example.MathPlayOpen.iam.infrastructure.persistence.jpa.repositories.RoleRepository;
 import com.example.MathPlayOpen.iam.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     private final RoleRepository roleRepository;
 
-    public UserCommandServiceImpl(UserRepository userRepository, HashingService hashingService, TokenService tokenService, RoleRepository roleRepository) {
+    public UserCommandServiceImpl(UserRepository userRepository, @Qualifier("hashingServiceImpl") HashingService hashingService, TokenService tokenService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.hashingService = hashingService;
         this.tokenService = tokenService;
